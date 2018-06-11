@@ -4,32 +4,40 @@ const config = require('./src/config');
 
 
 // creating the express app
-const app = express(); 
+const app = express();
 
 // parse the requests w/ content type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // parse requests w/ content type - application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
 
-mongoose.Promise = global.Promise; 
+mongoose.Promise = global.Promise;
 
 // using mongoose to connect to the database
 mongoose.connection.openUri(`mongodb://${config.db.username}:${config.db.password}@${config.db.host}/${config.db.dbName}`)
-    .then( () => { console.log("Successfully connected to the database!")})
-    .catch(err => { console.log("Unable to connect to the database.");
-    process.exit();
-});
+    .then(() => {
+        console.log("Successfully connected to the database!");
+    }).catch(err => {
+        console.log("Unable to connect to the database.");
+        process.exit();
+    });
 
 
 
 // GET request for the index route
 app.get('/', (req, res) => {
-    res.json( {"message": "This is the notes API. "});
+    res.json({
+        "message": "This is the notes API. "
+    });
 });
 
+// requiring the notes routes
+require('./src/routes/note.routes.js')(app);
 
 // to listen for requests
 app.listen(config.port, () => {

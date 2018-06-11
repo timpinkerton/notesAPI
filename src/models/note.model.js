@@ -6,7 +6,7 @@ const NoteSchema = mongoose.Schema({
     },
     // w/ timestamp option, mongoose automatically adds createdAt and updatedAt fields to the schema.
     {
-        timestamp: true,
+        timestamp: true
     });
 
 module.exports = mongoose.model('Note', NoteSchema)
