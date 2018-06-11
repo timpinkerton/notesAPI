@@ -2,7 +2,7 @@
   "name": "notesapi",
   "version": "1.0.0",
   "description": "A RESTful CRUD API using Node.js, Express, MongoDB and Mongoose.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
