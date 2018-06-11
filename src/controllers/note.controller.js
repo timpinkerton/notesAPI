@@ -50,6 +50,13 @@ exports.findOne = (req, res) => {
                 message: "Note with id " + req.params.noteId + " not found."
             });
         }
+        res.send(note);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Note with id " + req.params.noteId + " not found."
+            });
+        }
         return res.status(500).send({
             message: "Error retrieving note with id " + req.params.noteId
         });
